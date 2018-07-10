@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${catalina.base}/log4j/log4j.log" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- 根logger的设置 -->
+	<root>
+		<priority value="ERROR" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+	
+	<!-- quartz日志 -->
+	<appender name="quartz" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="${catalina.base}/log4j/org.quartz.log" />
+		<param name="MaxFileSize" value="300MB" />
+		<param name="MaxBackupIndex" value="31" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="org.quartz">
+		<level value="INFO" />
+		<appender-ref ref="quartz" />
+	</logger>
+	
+	
+	<!-- wxpay java sdk -->
+	<appender name="wxPaySdk" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/wxpayJavaSdk.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="wxpay java sdk" additivity="false">
+		<priority value ="DEBUG"/>
+		<appender-ref ref="wxPaySdk" />
+	</logger>
+	
+	
+	<!-- com.djy -->
+	<appender name="djy" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="djy" />
+    </logger>
+	
+	
+	<!-- com.djy.test -->
+	<appender name="test" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.test.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.test" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="test" />
+    </logger>
+	
+	
+	<!-- com.djy.job -->
+	<appender name="job" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.job.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.job" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="job" />
+    </logger>
+	
+	
+	<!-- com.djy.notice -->
+	<appender name="notice" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.notice.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.notice" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="notice" />
+    </logger>
+	
+	
+	<!-- com.djy.admin -->
+	<appender name="admin" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.admin.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.admin" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="admin" />
+    </logger>
+	
+	
+	<!-- com.djy.copartner -->
+	<appender name="copartner" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.copartner.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.copartner" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="copartner" />
+    </logger>
+	
+	<!-- com.djy.point -->
+	<appender name="point" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.point.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.point" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="point" />
+    </logger>
+	
+	
+	<!-- com.djy.partner -->
+	<appender name="partner" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.partner.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.partner" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="partner" />
+    </logger>
+	
+	
+	<!-- com.djy.empl -->
+	<appender name="empl" class="org.apache.log4j.FileAppender">
+		<param name="File" value="${catalina.base}/log4j/com.djy.empl.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%n%d{yyyy-MM-dd HH\:mm\:ss,SSS} %t(%r) %x %c%n[%p] [%l] %m%n" />
+		</layout>
+	</appender>
+	<logger name="com.djy.empl" additivity="false">
+        <priority value ="DEBUG"/>
+        <appender-ref ref="empl" />
+    </logger>
+	
+	
+</log4j:configuration>

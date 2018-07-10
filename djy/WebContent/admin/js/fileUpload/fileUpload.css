@@ -1,0 +1,147 @@
+.fileUpload .container {
+	border: 1px solid #dadada;
+    width: 100%;
+    padding: 0px;
+}
+
+.fileUpload .container .uploader {
+	padding: 5px;
+	margin: 0px;
+}
+
+.fileUpload .container .uploader .list {
+	padding: 15px 0px 0px 0px;
+	margin: 0px;
+	min-height: 40px;
+}
+
+.fileUpload .container .uploader .list:after {
+	content:"【文件列表】";
+    position: absolute;
+    top: 8px;
+    left: 18px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fileUpload .container .uploader .list .item {
+	margin:10px 0px;
+}
+
+.fileUpload .container .uploader .list .item .title {
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.fileUpload .container .uploader .list .item p.progress {
+	position: relative;
+    width: 100px;
+    height: 8px;
+    overflow: hidden;
+    z-index: 50;
+    margin-bottom: 5px;
+}
+
+.fileUpload .container .uploader .list .item p.progress span {
+	display: none;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    background: #1483d8 url(./progress.png) repeat-x;
+
+    -webit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+    -o-transition: width 200ms linear;
+    -ms-transition: width 200ms linear;
+    transition: width 200ms linear;
+
+    -webkit-animation: progressmove 2s linear infinite;
+    -moz-animation: progressmove 2s linear infinite;
+    -o-animation: progressmove 2s linear infinite;
+    -ms-animation: progressmove 2s linear infinite;
+    animation: progressmove 2s linear infinite;
+
+    -webkit-transform: translateZ(0);
+}
+
+@-webkit-keyframes progressmove {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 17px 0;
+    }
+}
+@-moz-keyframes progressmove {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 17px 0;
+    }
+}
+@keyframes progressmove {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 17px 0;
+    }
+}
+
+
+.fileUpload .container .uploader .list .item div.btns {
+    margin-bottom: 5px;
+}
+
+.fileUpload .container .uploader .list .item div.btns span {
+	cursor: pointer;
+	margin: 0 0 0 10px;
+}
+
+.fileUpload .container .uploader .list .item div.btns span:hover {
+	font-weight: 600;
+}
+
+
+.fileUpload .container .uploader .btns .filePicker {
+	display: inline-block;
+	float: left;
+}
+
+.fileUpload .container .uploader .btns .webuploader-pick,
+.fileUpload .container .uploader .btns .uploadBtn, 
+.fileUpload .container .uploader .btns .uploadBtn.state-uploading, 
+.fileUpload .container .uploader .btns .uploadBtn.state-paused {
+    display: inline-block;
+    font-size: 14px;
+    color: #565656;
+    line-height: 2.5rem;
+    padding: 0 15px;
+    background: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.fileUpload .container .uploader .btns .webuploader-pick-hover, 
+.fileUpload .container .uploader .btns .uploadBtn:hover, 
+.fileUpload .container .uploader .btns .uploadBtn.state-uploading:hover, 
+.fileUpload .container .uploader .btns .uploadBtn.state-paused:hover {
+    background: #f0f0f0;
+}
+
+
+.fileUpload .container .uploader .btns .uploadBtn {
+	background: #00b7ee;
+    color: #fff;
+    border-color: transparent;
+}
+
+.fileUpload .container .uploader .btns .uploadBtn:hover {
+    background: #00a2d4;
+}

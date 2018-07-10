@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="djy">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/properties"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/frameSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modelSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/businessSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/jobSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/testSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/adminSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/mtSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/noticeSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/partnerSrc"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/emplSrc"/>
+        <property name="context-root" value="djy"/>
+        <property name="java-output-path" value="/djy/build/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:cache="http://www.springframework.org/schema/cache" 
+	xsi:schemaLocation=" 
+          http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+          http://www.springframework.org/schema/tx 
+          http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+          http://www.springframework.org/schema/context 
+          http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+          http://www.springframework.org/schema/aop 
+          http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		  http://www.springframework.org/schema/cache 
+		  http://www.springframework.org/schema/cache/spring-cache-4.0.xsd" 
+	default-autowire="byName">
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.pwd}" />
+		<property name="minPoolSize" value="${c3p0.minPoolSize}" />
+		<property name="maxPoolSize" value="${c3p0.maxPoolSize}" />
+		<property name="maxIdleTime" value="${c3p0.maxIdleTime}" />
+		<property name="acquireIncrement" value="${c3p0.acquireIncrement}" />
+		<property name="maxStatements" value="${c3p0.maxStatements}" />
+		<property name="maxStatementsPerConnection" value="${c3p0.maxStatementsPerConnection}" />
+		<property name="initialPoolSize" value="${c3p0.initialPoolSize}" />
+		<property name="idleConnectionTestPeriod" value="${c3p0.idleConnectionTestPeriod}" />
+		<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}" />
+		<property name="breakAfterAcquireFailure" value="${c3p0.breakAfterAcquireFailure}" />
+		<property name="testConnectionOnCheckout" value="${c3p0.testConnectionOnCheckout}" />
+		<property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}" />
+		<property name="numHelperThreads" value="${c3p0.numHelperThreads}" />
+	</bean>
+	<bean id="dataSourceProxool" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver" value="${jdbc.driver}" />
+		<property name="driverUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.pwd}" />
+		<property name="alias" value="${proxool.alias}" />
+		<property name="houseKeepingSleepTime" value="${proxool.houseKeepingSleepTime}" />
+		<property name="prototypeCount" value="${proxool.prototypeCount}" />
+		<property name="maximumConnectionCount" value="${proxool.maximumConnectionCount}" />
+		<property name="minimumConnectionCount" value="${proxool.minimumConnectionCount}" />
+		<property name="simultaneousBuildThrottle" value="${proxool.simultaneousBuildThrottle}" />
+		<property name="maximumConnectionLifetime" value="${proxool.maximumConnectionLifetime}" />
+		<property name="houseKeepingTestSql" value="${proxool.houseKeepingTestSql}" />
+		<property name="statistics" value="${proxool.statistics}" />
+		<property name="statisticsLogLevel" value="${proxool.statisticsLogLevel}" />
+		<property name="trace" value="${proxool.trace}" />
+		<property name="verbose" value="${proxool.verbose}" />
+	</bean>
+	
+	<!-- 配置hibernate session工厂 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!-- 依赖注入数据源，注入正时上面的dataSource -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 定义hibernate的SessionFactory的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- 是否每次自动创建数据库 -->
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<!-- 指定数据库方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect </prop>
+				<!-- 是否显示hibernate持久化操作所生成的SQL -->
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+			</props>
+		</property>
+		<!-- 使用packagesToScan进行hibernate映射 -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.djy.**.model</value>
+			</list>
+		</property>
+		<property name="useTransactionAwareDataSource" value="true"></property>
+	</bean>
+	
+	
+	<!-- 配置事物管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 注解方式配置事物 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 拦截器方式配置事物（注：com.frame.base.service包及其子包） -->
+	<tx:advice id="transactionAdvice1" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="create*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="transactionPointcut1" expression="execution(* com.frame.base.service..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut1" advice-ref="transactionAdvice1" />
+	</aop:config>
+	
+	<!-- 拦截器方式配置事物（注：com.djy包及子包下的service.impl子包的ServiceImpl类） -->
+	<tx:advice id="transactionAdvice2" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="create*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="modify*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="change*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="Exception" />
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="transactionPointcut2" expression="execution(* com.djy..service.impl.*ServiceImpl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut2" advice-ref="transactionAdvice2" />
+	</aop:config>
+	
+	
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+	</bean>
+	<!-- 默认是cacheManager -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="cacheManagerFactory" />
+	</bean>
+	<!-- 支持缓存注解 -->
+	<cache:annotation-driven cache-manager="cacheManager" />
+	
+</beans>

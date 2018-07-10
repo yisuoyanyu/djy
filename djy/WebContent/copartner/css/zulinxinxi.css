@@ -1,0 +1,21 @@
+﻿@charset "utf-8";
+
+/*租赁信息和租赁意向相关界面使用 */
+.headdiv{position: relative;padding-left: 3%;padding-right: 2%;}
+.lidiv{margin-top: 0.8rem;margin-bottom: 0.8rem;}
+.spantitle{width:6em;display:inline-block;text-align:left;position:relative;left:3%;font-size:16px}
+.inputtext1{width: 60%;border-top-style: none; border-right-style: none; border-bottom-style: none;border-left-style: none;position: absolute; left: 7em;}
+.spantitle1{width:7em;display:inline-block;text-align:left;position:relative;left:3%;font-size:16px}
+.spancheck1{font-size: 14px;width:7em;display:-moz-inline-box;display:inline-block;text-align:left;position: relative;left:1.4em}
+.spancheck2{font-size: 14px;width:7em;display:-moz-inline-box;display:inline-block;text-align:left;left: 8em;position: absolute;}
+.spancheck3{font-size: 14px;width:7em;display:-moz-inline-box;display:inline-block;text-align:left;position: absolute;left: 17.5em}
+.firstdiv{width: 100%;margin-top: 0.8rem; margin-bottom: 0.8rem;}
+.spantitle2{text-align:left;position:relative;left:3%}
+.inputtext2{width:26%;text-align: center;border-top-style: none; border-right-style: none; border-bottom-style: ridge;border-left-style: none;}
+.lradio1{display: inline-block;margin-bottom: 0px;font-size:14px;position:relative;margin-left:2em}
+.inputtext3{width:13%;text-align: center;border-top-style: none; border-right-style: none; border-bottom-style: ridge;border-left-style: none;}
+.firstdiv1{background-color: white; position: relative;top: -14px;}
+.inputtext4{width:55%;text-align: center;border-top-style: none; border-right-style: none; border-bottom-style: none;border-left-style: none;}
+.spantitle3{width:8em;display:inline-block;text-align:left;position:relative;left:3%;font-size:16px}
+            
+

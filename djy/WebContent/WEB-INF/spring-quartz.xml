@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	
+	<bean id="testDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="testQuartzService" />
+		</property>
+		<property name="targetMethod">
+			<value>testQuartz</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="testDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 * * * ?</value>
+		</property>
+	</bean>
+	
+	<bean id="bonusStatsDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="bonusStatsQuartzService" />
+		</property>
+		<property name="targetMethod">
+			<value>bonusStatsQuartz</value>
+		</property>
+		<property name="concurrent" value="false" />
+	</bean>
+	<bean id="bonusStatsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="bonusStatsDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 1 * * ?</value>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="testTrigger" />
+				<ref bean="bonusStatsTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

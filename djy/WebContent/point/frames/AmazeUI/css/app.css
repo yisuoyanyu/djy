@@ -1,0 +1,29 @@
+/* Write your styles */
+
+/* 图片轮播 */
+.am-slider-a1 .am-control-nav li a.am-active { background-color:red;}
+.am-slider-a1 .am-control-nav li a { background-color: #ffffff;}
+
+/* 标题栏 */
+.am-titlebar-default { margin:0px; padding: 0px 10px; background-color:#ffffff; border-bottom:0px;}
+.am-titlebar-default a { color:#666; }
+.am-titlebar-default .am-titlebar-title { color: #000; font-weight:normal; }
+.am-titlebar-default .am-titlebar-title:before { border-left:4px solid red;  }
+
+/* 侧边栏 */
+.am-offcanvas-bar { width:80%; background-color:#ffffff; }
+.am-offcanvas-bar:after { background-color:#ffffff; }
+
+/* 输入框获取焦点时的效果 */
+.am-form-field:focus { background-color: #ffffff; border-color: #ff0000; 
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 5px rgba(255, 0, 0, 0.3);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 5px rgba(255, 0, 0, 0.3); }
+	
+/* 头部 */
+.am-header-default { background-color: #ffffff; border-bottom:1px solid #dddddd;}
+.am-header-default .am-header-title { color: #262626; }
+.am-header-default .am-header-title a { color: #262626; }
+.am-header-default .am-header-nav { color: #262626; }
+.am-header-default .am-header-nav > a { color: #262626; }
+.am-header-fixed { top:-1px; }
+.am-header { height:50px; }
